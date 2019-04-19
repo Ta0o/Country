@@ -11,7 +11,7 @@ namespace ConsoleApp1
     class Program
     {
         public static void Create(ref int Count, ref String[] number, ref String[] names,ref String[] sex, ref String[] snames,ref String[] age, Random rnd, String[] Mname, String[] Wname, String[] Sname,ref String[] mothers, ref String[] fathers,ref String[] bornCd, ref String[] alive, ref String[] income,ref int money,ref int taxRate)
-        {
+        {// метод начала игры вызывается командой "/begin", создает 19 случайных людей
             for (int i = Count; i != 20; i++)
             {
                 Count += 1;
@@ -55,10 +55,10 @@ namespace ConsoleApp1
             }
         }
         public static void Answer(ref String command, ref int Count, ref String[] number, ref String[] names, ref String[] sex, ref String[] snames, ref String[] age, Random rnd, String[] Mname, String[] Wname, String[] Sname, ref String[] mothers, ref String[] fathers,ref String[] bornCd,ref int gS,ref String[] alive ,ref int dCount,ref int tdCount, ref String[] income,ref int money,ref int everyYearTax,ref int taxRate)
-        {
+        {//метод обработки запроса
             switch (command)
             {
-                case "/begin":
+                case "/begin"://начало игры
                     Console.Clear();
                     if (gS != 1)
                     {
@@ -73,7 +73,7 @@ namespace ConsoleApp1
                         Console.WriteLine("You already started game.");
                     }
                     break;
-                case "/showAllPersons":
+                case "/showAllPersons":// информация о всех людях
                     Console.Clear();
                     Console.WriteLine("Number| Name   | Surname |Gender|Mother | Father |   Age   |BornCooldown| is Alive | Income");
                     Console.WriteLine("--------------------------------------------------------------------------------------------");
@@ -172,13 +172,13 @@ namespace ConsoleApp1
                     Console.WriteLine("Write '/commands' if don’t know what to run the country.");
                     Console.WriteLine("Write '/help' if don’t know what to run the country.");
                     break;
-                case "/showStats":
+                case "/showStats"://глобальная статистика на текущий ход
                     Console.Clear();
                     Console.WriteLine("Total people : " + Count + "\n" + "Dead people : " + dCount + "\n" + "People alive : " + (Count - dCount) + "\n" + "Dead people today : " + tdCount + "\n" + "This year income : " + everyYearTax + "\n" + "Total money : " + money + "$ .");
                     Console.WriteLine("Write '/commands' if don’t know what to run the country.");
                     Console.WriteLine("Write '/help' if don’t know what to run the country.");
                     break;
-                case "/commands":
+                case "/commands":// список команд
                     Console.Clear();
                     Console.WriteLine("Write '/showStats' if you want to see how well you rule(bad).");
                     Console.WriteLine("Write '/showAllPersons' if you want to looking for the stupid little people.");
@@ -186,11 +186,11 @@ namespace ConsoleApp1
                     Console.WriteLine("Write '/commands' if don’t know what to run the country.");
                     Console.WriteLine("Write '/help' if don’t know what to run the country.");
                     break;
-                case "/help":
+                case "/help"://общие слова по поводу игры
                     Console.Clear();
                     Console.WriteLine("Hello, my lord."+"\n"+"If you came here, it means that you have never sowed tyranny in a small, inconspicuous country and did not follow silly little dogs."+"\n"+"In short, you need to make your country great, but some people do not speak much about cardinal politics, so it would not be bad to punish them."+"\n"+ "Write '/commands' to find possible commands.You are certainly omnipotent, but unfortunately you do not break some laws, such as physics, but common sense can be ignored.");
                     break;
-                case "/nextTurn":
+                case "/nextTurn"://следуйщий ход(год), увеличивается возраст всех людей на год, рождаются новые, обсчитываются налоги, умирают люди
                     Console.Clear();
                     tdCount = 0;
                     Born(ref Count, ref number, ref names, ref sex, ref snames, ref age, rnd, Mname, Wname, Sname, ref mothers, ref fathers,ref bornCd, ref alive, ref income, ref money,ref everyYearTax,ref taxRate);
@@ -220,7 +220,7 @@ namespace ConsoleApp1
             
         }
         public static void Info(int Count, int dCount, int tdCount, ref String[] income, ref int money, ref int everyYearTax,ref int taxRate)
-        {
+        {//ежегодная статистика, вызывается в конце метода "/nextTurn", от "/showStats" тем , что этот вызывается каждый ход, а другой только при команде
             Console.Clear();
             Console.WriteLine("Total people : " + Count + "\n" + "Dead people : " + dCount + "\n" + "People alive : " + (Count - dCount) + "\n" + "Dead people today : " + tdCount + "\n" + "This year income : " + everyYearTax +"$."+ "\n" + "Total money : " + money + "$ .");
             Console.WriteLine("Nice job.");
@@ -322,7 +322,7 @@ namespace ConsoleApp1
             }
         }
         public static void MoneyGaining(int MoneyIncome,ref int money)
-        { 
+        { // окончательная прибавка денег, либо в виде MoneyGaining("число", money)при случайных событиях, либо прибавка налогов MoneyGaining(everyYearTax,money)
             money = money + MoneyIncome;
             Console.WriteLine("You gain : " + MoneyIncome + " $.");
             Console.WriteLine("Total money : "+ money + " $.");
@@ -359,7 +359,8 @@ namespace ConsoleApp1
             Console.WriteLine("Hello, enjoy world of DEAD and anarchy");// что-то типо вступления
             Console.WriteLine("Write '/begin' to start the adventure in the rotten world of capitalism and dictatorship.");
             Console.WriteLine("Write '/help' to get help around the world of lies and power.");
-            Console.WriteLine("Write '/commands' to get list of commands for controlled mortals.");
+            Console.WriteLine("Write '/commands' to get list of commands for controlled mortals.");// что-то типо вступления
+            
             while (a == 1)//бесконечный цикл
             {
                 command = Console.ReadLine();//запрос команды
